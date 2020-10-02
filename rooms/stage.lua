@@ -8,3 +8,12 @@ function Stage:new()
   local second_rect = self:addObject(Rectangle, 0, 0, {color = {1, 0, 0, 1}, mult = -1})
   second_rect.draw_priority = -1
 end
+
+
+function Stage:draw()
+  self.super.draw(self)
+  
+  love.graphics.print("test text!!!")
+  
+  
+end

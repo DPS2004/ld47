@@ -42,6 +42,9 @@ function love.load()
   -- for pixels to look pixelly
   love.graphics.setLineStyle('rough')
   love.graphics.setDefaultFilter('nearest')
+  local font = love.graphics.newFont('assets/04b03.ttf',8)
+  font:setFilter('nearest')
+  love.graphics.setFont(font)
 
   -- do push stuff
   push:setupScreen(gw, gh, gw*sx, gh*sy, {pixelperfect = true})
