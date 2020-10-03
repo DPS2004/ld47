@@ -46,20 +46,10 @@ function love.load()
     },
       joystick = love.joystick.getJoysticks()[1],
   }
-  --keybinds for resizing the window
-  input:bind('1', function() resize(1) end)
-  input:bind('2', function() resize(2) end)
-  input:bind('3', function() resize(3) end)
-  input:bind('4', function() resize(4) end)
-  input:bind('5', function() resize(5) end)
-  input:bind('r', lurker.scan)
-
-  -- keybind to hot reload code and reload the main room
-  input:bind('f5', function() lurker.scan() gotoRoom('Stage') end)
 
   cs = nil
 
-  gotoRoom('Stage')
+  gotoRoom('Menu')
 
 
 
