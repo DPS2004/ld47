@@ -17,16 +17,16 @@ function player:update()
   
   if maininput:down("left") then
     if self.dx > 0 then
-      self.dx = self.dx - 0.20
+      self.dx = self.dx - 0.35
     else
-      self.dx = self.dx - 0.15
+      self.dx = self.dx - 0.30
     end
   end
   if maininput:down("right") then
     if self.dx < 0 then
-      self.dx = self.dx + 0.20
+      self.dx = self.dx + 0.35
     else
-      self.dx = self.dx + 0.15
+      self.dx = self.dx + 0.30
     end
   end
   if self.dx >= 5 then
@@ -45,12 +45,15 @@ function player:update()
     self.dx = self.dx + 0.05
   end
 
-  if self.x > 45 then
-    self.x = 45
-    self.dx = 0
-  elseif self.x < -45 then
-    self.x = - 45
-    self.dx = 0
+  if self.x > 30 then
+    self.dx = self.dx - 0.05
+  elseif self.x < -30 then
+    self.dx = self.dx + 0.05
+  end
+  if self.x > 0 then
+    self.x = self.x /1.1
+  elseif self.x < 0 then
+    self.x = self.x/1.1
   end
 
   if math.abs(self.dx) <= 0.05 then
