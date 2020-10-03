@@ -30,8 +30,8 @@ function player:update()
       self.dx = self.dx + 0.30
     end
   end
-  if maininput:pressed("up") and self.y < 10 then
-    self.dy = self.dy + 1.5
+  if maininput:pressed("up") and self.y < 3 then
+    self.dy = 3.33
   end
   if self.dx >= 5 then
     self.dx = 5
@@ -49,8 +49,8 @@ function player:update()
   if self.dx < 0 then
     self.dx = self.dx + 0.05
   end
-  if self.dy > 0 then
-    self.dy = self.dy - 0.006
+  if self.dy > -5 then
+    self.dy = self.dy - 0.1
   end
 
   if self.x > 30 then
@@ -64,7 +64,7 @@ function player:update()
     self.x = self.x/1.1
   end
   if self.y > 85 then
-    self.dy = -0.05
+    self.dy = -1
   elseif self.y > 0 then
     self.y = self.y-0.5 /1.01
   else 
