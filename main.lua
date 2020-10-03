@@ -4,6 +4,7 @@ Input = require 'lib/boipushy'
 Timer = require 'lib/chrono'
 Camera = require 'lib/camera'
 moses = require 'lib/moses'
+lovebird = require 'lib/lovebird'
 lurker = require 'lib/lurker'
 helpers = require 'lib/helpers'
 colors = {{1,1,1},{0,0,0},{255/255,33/255,232/255},{178/255,0,255/255},{33/255,0,127/255}}
@@ -37,7 +38,7 @@ function love.load()
   -- keybind to hot reload code and reload the main room
   input:bind('f5', function() lurker.scan() gotoRoom('Stage') end)
 
-  current_room = nil
+  cs = nil
 
   gotoRoom('Stage')
 
@@ -59,19 +60,20 @@ function love.load()
 end
 
 function love.update(dt)
-  current_room:update(dt)
+  cs:update(dt)
+  lovebird.update()
 end
 
 function love.draw()
   push:start()
   shack:apply()
-  current_room:draw()
+  cs:draw()
   push:finish()
 end
 
 function gotoRoom(room_type, ...)
-  if current_room and current_room.destroy then
-    current_room:destroy()
+  if cs and cs.destroy then
+    cs:destroy()
   end
-  current_room = _G[room_type](...)
+  cs = _G[room_type](...)
 end
