@@ -17,7 +17,7 @@ end
 function Stage:draw()
   self.super.draw(self)
   helpers.color(1)
-  love.graphics.print("test text!!!")
+  love.graphics.print(tostring(love.timer.getFPS()))
   
   
 end

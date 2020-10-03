@@ -61,12 +61,16 @@ function love.load()
 
   -- shack can be used for screen shakes and stuff whoaaa
   shack:setDimensions(gw, gh)
+
+  min_dt = 1/60
+  next_time = love.timer.getTime()
 end
 
 function love.update(dt)
   maininput:update()
   cs:update(dt)
   lovebird.update()
+  next_time = next_time + min_dt
 end
 
 function love.draw()
@@ -74,6 +78,12 @@ function love.draw()
   shack:apply()
   cs:draw()
   push:finish()
+  local cur_time = love.timer.getTime()
+  if next_time <= cur_time then
+    next_time = cur_time
+    return
+  end
+  love.timer.sleep(next_time - cur_time)
 end
 
 function gotoRoom(room_type, ...)
