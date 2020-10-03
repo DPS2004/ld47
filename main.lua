@@ -40,6 +40,7 @@ function love.load()
       down = {"key:down", "key:s", "axis:lefty+", "button:dpdown"},
       accept = {"key:space", "button:a"},
       back = {"key:escape", "button:b"},
+      reload = {"key:r"},
     },
     pairs = {
       lr = {"left", "right", "up", "down"}
@@ -70,6 +71,9 @@ function love.update(dt)
   maininput:update()
   cs:update(dt)
   lovebird.update()
+  if maininput:pressed("reload") then
+    lurker.scan()
+  end
   next_time = next_time + min_dt
 end
 
