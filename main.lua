@@ -3,6 +3,7 @@ Object = require 'lib/classic'
 Input = require 'lib/boipushy'
 Timer = require 'lib/chrono'
 Camera = require 'lib/camera'
+baton = require 'lib/baton'
 moses = require 'lib/moses'
 lovebird = require 'lib/lovebird'
 lurker = require 'lib/lurker'
@@ -15,7 +16,12 @@ shack = require 'lib/shack'
 deep = require 'lib/deep'
 
 require 'utils'
-
+-- for pixels to look pixelly
+love.graphics.setLineStyle('rough')
+love.graphics.setDefaultFilter('nearest','nearest')
+local font = love.graphics.newFont('assets/04b03.ttf',8)
+font:setFilter('nearest')
+love.graphics.setFont(font)
 -- require() all the objects and rooms files yeah
 require 'classrequire'
 obj_list = {}
@@ -26,7 +32,20 @@ requireFiles(obj_list)
 function love.load()
   input = Input()
   camera = Camera()
-
+  maininput = baton.new {
+    controls = {
+      left = {"key:left",  "axis:leftx-", "button:dpleft"},
+      right = {"key:right",  "axis:leftx+", "button:dpright"},
+      up = {"key:up", "key:w", "axis:lefty-", "button:dpup"},
+      down = {"key:down", "key:s", "axis:lefty+", "button:dpdown"},
+      accept = {"key:space", "button:a"},
+      back = {"key:escape", "button:b"},
+    },
+    pairs = {
+      lr = {"left", "right", "up", "down"}
+    },
+      joystick = love.joystick.getJoysticks()[1],
+  }
   --keybinds for resizing the window
   input:bind('1', function() resize(1) end)
   input:bind('2', function() resize(2) end)
@@ -42,12 +61,7 @@ function love.load()
 
   gotoRoom('Stage')
 
-  -- for pixels to look pixelly
-  love.graphics.setLineStyle('rough')
-  love.graphics.setDefaultFilter('nearest')
-  local font = love.graphics.newFont('assets/04b03.ttf',8)
-  font:setFilter('nearest')
-  love.graphics.setFont(font)
+
 
   -- do push stuff
   push:setupScreen(gw, gh, gw*sx, gh*sy, {pixelperfect = true})
@@ -60,6 +74,7 @@ function love.load()
 end
 
 function love.update(dt)
+  maininput:update()
   cs:update(dt)
   lovebird.update()
 end
