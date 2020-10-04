@@ -5,6 +5,7 @@ Timer = require 'lib/chrono'
 Camera = require 'lib/camera'
 baton = require 'lib/baton'
 moses = require 'lib/moses'
+ez = require 'lib/ezanim'
 lovebird = require 'lib/lovebird'
 lurker = require 'lib/lurker'
 helpers = require 'lib/helpers'
@@ -84,6 +85,7 @@ function love.draw()
   push:finish()
   local cur_time = love.timer.getTime()
   if next_time <= cur_time then
+    next_time = cur_time
     next_time = cur_time
     return
   end

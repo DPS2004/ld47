@@ -10,7 +10,7 @@ function player:new(...)
   self.y = 0
   self.dx = 0
   self.x = 0
-  self.spr = love.graphics.newImage("assets/spr/player.png")
+  self.spr = ez.newanim(ez.newtemplate("assets/spr/runanimtemp.png",16,3,true))
   
 end
 
@@ -74,13 +74,14 @@ function player:update()
   if math.abs(self.dx) <= 0.05 then
     self.dx = 0
   end
+  ez.animupdate(self.spr,1)
 end
 
 function player:draw()
   --love.graphics.push("all")
   love.graphics.setColor(self.color)
   love.graphics.setDefaultFilter('nearest','nearest')
-  love.graphics.draw(self.spr,gw/2,gh/2,math.rad(0-self.x),1,1,9,-80+self.y)
+  ez.animdraw(self.spr,gw/2,gh/2,math.rad(0-self.x),1,1,9,-80+self.y)
   love.graphics.print(tostring(self.y),0,40)
   --love.graphics.pop()
 end
