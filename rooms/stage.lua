@@ -17,6 +17,8 @@ function Stage:update(dt)
     gotoRoom('Menu')
   end
   if self.paused then return end
+  if self.block.x < -180 then self.block.x = 180 end
+  if self.spike.x < -180 then self.spike.x = 180 end
   Stage.super.update(self, dt)
 end
 

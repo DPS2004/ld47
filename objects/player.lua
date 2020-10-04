@@ -8,6 +8,7 @@ function player:new(...)
   self.height = 16
   self.dy = 0
   self.y = 0
+  self.old_y = 0
   self.dx = 0
   self.x = 0
   self.spr = ez.newanim(ez.newtemplate("assets/spr/runanimtemp.png",16,3,true))
@@ -30,9 +31,6 @@ function player:update()
     else
       self.dx = self.dx + 0.30
     end
-  end
-  if maininput:pressed("up") and self.y < 3 then
-    self.dy = 3.33
   end
   if self.dx >= 5 then
     self.dx = 5
@@ -72,6 +70,7 @@ function player:update()
     self.y = 0
   end
 
+
   
   -- yoo collision stuffff
   local filter = function(item, other) 
@@ -93,6 +92,10 @@ function player:update()
       self.room:pause()
     end
   end
+  if maininput:pressed("up") and self.old_y == self.y then
+    self.dy = 3.3
+  end
+  self.old_y = self.y
 
   if math.abs(self.dx) <= 0.05 then
     self.dx = 0
@@ -105,7 +108,7 @@ function player:draw()
   love.graphics.setColor(self.color)
   love.graphics.setDefaultFilter('nearest','nearest')
   ez.animdraw(self.spr,gw/2,gh/2,math.rad(0-self.x),1,1,0,-80+self.y)
-  love.graphics.print(tostring(self.y),0,40)
+  love.graphics.print("      Y: "..tostring(self.y).."\n  Old Y: "..tostring(self.old_y).."\nDelta Y: "..tostring(self.dy),0,40)
   --love.graphics.pop()
 end
 
