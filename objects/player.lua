@@ -11,7 +11,8 @@ function player:new(...)
   self.dx = 0
   self.x = 0
   self.spr = ez.newanim(ez.newtemplate("assets/spr/runanimtemp.png",16,3,true))
-  
+  self.shape = {name="player"}
+  self.world:add(self.shape, self.x, self.y, 8, self.height)
 end
 
 function player:update()
@@ -71,6 +72,28 @@ function player:update()
     self.y = 0
   end
 
+  
+  -- yoo collision stuffff
+  local filter = function(item, other) 
+    if other.name == "spike" then
+      return "cross"
+    end
+    if other.name == "block" then
+      return "slide"
+    end
+  end
+  print(self.x)
+  local real_x, real_y, cols = self.world:move(self.shape, self.x, self.y, filter)
+  self.x = real_x
+  self.y = real_y
+  for i, col in pairs(cols) do
+    print(col.other.name, col.normal.x, col.normal.y)
+    if col.other.name == "block" and (col.normal.x == -1 or col.normal.y == -1) 
+       or col.other.name == "spike" then
+      self.room:pause()
+    end
+  end
+
   if math.abs(self.dx) <= 0.05 then
     self.dx = 0
   end
@@ -81,7 +104,7 @@ function player:draw()
   --love.graphics.push("all")
   love.graphics.setColor(self.color)
   love.graphics.setDefaultFilter('nearest','nearest')
-  ez.animdraw(self.spr,gw/2,gh/2,math.rad(0-self.x),1,1,9,-80+self.y)
+  ez.animdraw(self.spr,gw/2,gh/2,math.rad(0-self.x),1,1,0,-80+self.y)
   love.graphics.print(tostring(self.y),0,40)
   --love.graphics.pop()
 end

@@ -14,6 +14,7 @@ function GameObject:new(room, x, y, opts)
   self.timer = Timer()
   self.draw_priority = 0
   self.update_priority = 0
+  self.world = room.world
 end
 
 function GameObject:update(dt)
@@ -25,5 +26,9 @@ function GameObject:draw()
 end
 
 function GameObject:kill()
+  if self.shape then
+    self.world:remove(self.shape)
+  end
+
   self.dead = true
 end

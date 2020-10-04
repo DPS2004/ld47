@@ -51,7 +51,6 @@ function ezanim.animupdate(a,dt)
     end 
   else
 end
-print(a.f)
 end
 
 function ezanim.animdraw(a,x,y,r,sx,sy,ox,oy,kx,ky)

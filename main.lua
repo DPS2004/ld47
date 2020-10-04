@@ -15,6 +15,7 @@ push = require 'lib/push'
 inspect = require 'lib/inspect'
 shack = require 'lib/shack'
 deep = require 'lib/deep'
+bump = require 'lib/bump'
 
 require 'utils'
 -- for pixels to look pixelly
@@ -42,6 +43,7 @@ function love.load()
       accept = {"key:space", "button:a"},
       back = {"key:escape", "button:b"},
       reload = {"key:r"},
+      draw_collision = {"key:t"},
     },
     pairs = {
       lr = {"left", "right", "up", "down"}
@@ -75,6 +77,9 @@ function love.update(dt)
   if maininput:pressed("reload") then
     lurker.scan()
   end
+  if maininput:pressed("draw_collision") then
+    draw_collision = not draw_collision
+  end
   next_time = next_time + min_dt
 end
 
@@ -82,6 +87,25 @@ function love.draw()
   push:start()
   shack:apply()
   cs:draw()
+
+  if draw_collision then
+    love.graphics.push("all")
+    love.graphics.translate(gw/2, gh/2 + 100)
+    love.graphics.scale(-1, 1)
+    love.graphics.rotate(math.pi)
+    love.graphics.setLineWidth(1)
+    if cs.world then
+      for i, v in ipairs(cs.world:getItems()) do
+        love.graphics.setColor(1, 0, 0, 0.7)
+        love.graphics.rectangle('fill', cs.world:getRect(v))
+        love.graphics.setColor(1, 1, 1, 0.7)
+        love.graphics.rectangle('line', cs.world:getRect(v))
+        --print(inspect{cs.world:getRect(v)}, inspect(v))
+      end
+    end
+    love.graphics.pop()
+  end
+
   push:finish()
   local cur_time = love.timer.getTime()
   if next_time <= cur_time then
