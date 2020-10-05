@@ -43,7 +43,9 @@ function portal:update()
   	local objectY = math.random(0,6)*10
   	self.objectRNG = math.random(0,100)/100
   	if objectY > 44 and objectY < 60 then objectY = 60 end
-  	if self.objectRNG > 0.75 then
+    if self.objectRNG > 0.9 then
+      self:fmBolt()
+  	elseif self.objectRNG > 0.75 then
   	  self:fmHoleInWall()
   	elseif self.objectRNG > 0.5 then
   	  self:fmSpikeBlock()
@@ -95,6 +97,9 @@ end
 function portal:fmSpikeBlock()
 	self.room:addObject(block,self.x,0)
 	self.room:addObject(spike,self.x,16)
+end
+function portal:fmBolt()
+  self.room:addObject(bolt,math.random(-20,20),0)
 end
 
 function portal:fmDoubleBlock()

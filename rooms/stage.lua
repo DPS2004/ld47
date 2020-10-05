@@ -65,7 +65,7 @@ function Stage:draw()
   push:setCanvas("main")
   self.super.draw(self)
   helpers.color(1)
-  love.graphics.print(level_playing.."Score: "..tostring(self.score)..
+  love.graphics.print(level_playing.." Score: "..tostring(self.score)..
     "\n"..tostring(love.timer.getFPS()))
   love.graphics.draw(self.emitter)
 

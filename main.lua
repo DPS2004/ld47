@@ -80,8 +80,8 @@ function love.load()
   })
   push:getCanvasTable("background").canvas:setWrap("mirroredrepeat")
   settings = {}
-  settings.spawnMin = 300
-  settings.spawnMax = 600
+  settings.spawnMin = 30
+  settings.spawnMax = 100
   settings.decorDens = 10
   settings.masterVolume = 1
   settings.musicVolume = 1
