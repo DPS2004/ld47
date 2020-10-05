@@ -11,6 +11,8 @@ function player:new(...)
   self.old_y = 0
   self.dx = 0
   self.x = 0
+  self.hp = 3
+  self.safety = 0
   self.spr = ez.newanim(ez.newtemplate("assets/spr/runanimtemp.png",16,3,true))
   self.shape = {name="player"}
   self.world:add(self.shape, self.x, self.y, 8, self.height)
@@ -87,11 +89,16 @@ function player:update()
   self.y = real_y
   for i, col in pairs(cols) do
     print(col.other.name, col.normal.x, col.normal.y)
-    if col.other.name == "block" and (col.normal.x == -1 or col.normal.y == -1) 
-       or col.other.name == "spike" then
-      self.room:pause()
+    if self.safety == 0 and (col.other.name == "block" and (col.normal.x == -1 or col.normal.y == -1) 
+       or col.other.name == "spike") then
+      self.hp = self.hp - 1
+      self.safety = 180
+      if self.hp == 0 then
+        gotoRoom('Menu')
+      end
     end
   end
+  if self.safety ~= 0 then self.safety = self.safety - 1 end
   if maininput:pressed("up") and self.old_y == self.y then
     self.dy = 3.3
   end
@@ -107,8 +114,14 @@ function player:draw()
   --love.graphics.push("all")
   love.graphics.setColor(self.color)
   love.graphics.setDefaultFilter('nearest','nearest')
-  ez.animdraw(self.spr,gw/2,gh/2,math.rad(0-self.x),1,1,0,-80+self.y)
-  love.graphics.print("      Y: "..tostring(self.y).."\n  Old Y: "..tostring(self.old_y).."\nDelta Y: "..tostring(self.dy),0,40)
+  if self.safety % 4 < 3 or self.safety == 0 then
+    ez.animdraw(self.spr,gw/2,gh/2,math.rad(0-self.x),1,1,0,-80+self.y)
+  end
+  love.graphics.print("Y: "..tostring(self.y)..
+    "\nOld Y: "..tostring(self.old_y)..
+    "\nDelta Y: "..tostring(self.dy)..
+    "\nHP: "..tostring(self.hp)..
+    "\nInvuln.: "..tostring(math.floor(self.safety/6)/10),0,40)
   --love.graphics.pop()
 end
 
