@@ -78,6 +78,9 @@ function love.load()
   settings.spawnMin = 300
   settings.spawnMax = 600
   settings.decorDens = 10
+  settings.masterVolume = 1
+  settings.musicVolume = 1
+  settings.soundVolume = 1
 
   -- shack can be used for screen shakes and stuff whoaaa
   shack:setDimensions(gw, gh)
