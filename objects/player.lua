@@ -93,6 +93,8 @@ function player:update()
   if self.x > 120 or self.x < -120 then
     if self.safety == 0 then
       self.hp = self.hp - 1
+      hurtsnd:stop()
+      hurtsnd:play()
     end
     self.safety = 240
     self.x = 0
@@ -105,7 +107,7 @@ function player:update()
 
   -- yoo collision stuffff
   local filter = function(item, other) 
-    if other.name == "spike" then
+    if other.name == "spike" or other.name == "coin" then
       return "cross"
     end
     if other.name == "block" then
@@ -118,10 +120,9 @@ function player:update()
   self.y = real_y
   for i, col in pairs(cols) do
     print(col.other.name, col.normal.x, col.normal.y)
-    if col.other.name == "coin" then
-      self.room.score = self.room.score + 10
-    end
     if self.safety == 0 and col.other.name == "spike" then
+      hurtsnd:stop()
+      hurtsnd:play()
       self.hp = self.hp - 1
       self.safety = 180
     end
