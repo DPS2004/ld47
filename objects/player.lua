@@ -15,6 +15,7 @@ function player:new(...)
   self.safety = 0
   self.spr = ez.newanim(ez.newtemplate("assets/spr/runanimtemp.png",16,3,true))
   self.shape = {name="player"}
+  self.draw_priority = 50
   self.world:add(self.shape, self.x, self.y, 8, self.height)
 end
 
