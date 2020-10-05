@@ -21,6 +21,9 @@ end
 function player:update()
   ez.animupdate(self.spr,1)
   self.old_y = self.y
+  if self.hp == 0 then
+    gotoRoom('Menu')
+  end
   
   if maininput:down("left") then
     if self.dx > 0 then
@@ -76,6 +79,15 @@ function player:update()
 
 
   
+  if self.safety ~= 0 then self.safety = self.safety - 1 end
+
+  if maininput:pressed("up") and self.old_y == self.y then
+    self.dy = 3.3
+  end
+
+  if math.abs(self.dx) <= 0.05 then
+    self.dx = 0
+  end
   -- yoo collision stuffff
   local filter = function(item, other) 
     if other.name == "spike" then
@@ -95,18 +107,7 @@ function player:update()
        or col.other.name == "spike") then
       self.hp = self.hp - 1
       self.safety = 180
-      if self.hp == 0 then
-        gotoRoom('Menu')
-      end
     end
-  end
-  if self.safety ~= 0 then self.safety = self.safety - 1 end
-  if maininput:pressed("up") and self.old_y == self.y then
-    self.dy = 3.3
-  end
-
-  if math.abs(self.dx) <= 0.05 then
-    self.dx = 0
   end
 end
 
