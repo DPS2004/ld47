@@ -13,9 +13,10 @@ function Menu:new()
     {{1,0,0,1},{1,0.5,0,1},{1,1,0,1},{0,1,0,1},{0,0,1,1},{0.1,0,1,1},{1,0,1,1},{1,1,1,1}} --ds
   }
   self.focus = 1
-  self.level = 1
+  self.level = 0
+  self.logo = ez.newanim(ez.newtemplate("assets/spr/logo.png",160,3,true))
 
-  self.optionsMenu = self:addObject(OptionBox, gw/2, gh/2, {width = 120, height = 46, options = {
+  self.optionsMenu = self:addObject(OptionBox, gw/2, gh*(2/3), {width = 120, height = 46, options = {
     {type = "float", name = "Play", step = "1", value = self.level, onSet = function(v)
         self.level = math.max(math.min(v, 30), 0)
         self.optionsMenu.options[1].value = self.level
@@ -29,7 +30,7 @@ function Menu:new()
     },
     {type = "function", name = "Options", func = function()
     	self.optionsMenu:kill()
-    	self:addObject(OptionBox, gw/2, gh/2, {width = 180, height = 75, options = {
+    	self:addObject(OptionBox, gw/2, gh*(2/3), {width = 180, height = 75, options = {
     		{type = "float", name = "Endless Spawn Min Time (seconds):", step = "1", value = settings.spawnMin/60, onSet = function(v) settings.spawnMin = math.min(v*60, settings.spawnMax) end},
     		{type = "float", name = "Endless Spawn Max Time (seconds):", step = "1", value = settings.spawnMax/60, onSet = function(v) settings.spawnMax = math.max(v*60, settings.spawnMin) end},
     		{type = "float", name = "Decoration Density:", step = "1", value = settings.decorDens, onSet = function(v) settings.decorDens = math.min(math.max(v, 1), 100) end},
@@ -47,7 +48,7 @@ function Menu:new()
     end},
     {type = "function", name = "Credits", func = function ()
       self.optionsMenu:kill()
-      self:addObject(OptionBox, gw/2, gh/2, {width = 200, height = 66, options = {
+      self:addObject(OptionBox, gw/2, gh*(2/3), {width = 200, height = 66, options = {
         {type = "function", name = "DPS2004 - Coordinator, Lead Developer", func = function() self.focus = 2 end},
         {type = "function", name = "pipelinks - Programmer, Shader Expert", func = function() self.focus = 3 end},
         {type = "function", name = "Katie1118 - Lead Artist, Hypesquad", func = function() self.focus = 4 end},
@@ -67,6 +68,7 @@ function Menu:update(dt)
     self.color = self.colors[self.focus][math.random(1,#self.colors[self.focus])]
     self.last = love.timer.getTime()
   end
+  ez.animupdate(self.logo,1)
 end
 
 function Menu:draw()
@@ -76,6 +78,8 @@ function Menu:draw()
   love.graphics.push("all")
   love.graphics.setColor(self.color)
   love.graphics.rectangle("fill",0,gh-18,gw,18,4)
+  helpers.color(1)
+  ez.animdraw(self.logo,110,10)
   love.graphics.pop()
   helpers.color(2)
   love.graphics.print("Thanks for playing! Here's some colors chosen by the devs.", 26, gh-13)

@@ -82,10 +82,16 @@ function OptionBox:draw()
         self.y + self.padding - self.height / 2 + next_option_height
       )
     if (v.type ~= "function") then
+      if v.name == "Play" and v.value ==0 then
+      love.graphics.print("Endless",
+      self.x + self.width / 2 - self.padding - font:getWidth(tostring("Endless")),
+      self.y - self.height / 2+ self.padding + next_option_height)
+      else
       love.graphics.print(tostring(v.value),
       self.x + self.width / 2 - self.padding - font:getWidth(tostring(v.value)),
-      self.y - self.height / 2+ self.padding + next_option_height
-    )
+      self.y - self.height / 2+ self.padding + next_option_height)
+      end
+    
     end
     next_option_height = next_option_height + font:getHeight() + self.line_spacing
   end
