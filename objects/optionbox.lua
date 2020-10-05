@@ -5,7 +5,7 @@ function OptionBox:new(area, x, y, opts)
   self.visual_width = 0
   self.visual_height = 0
   self.timer:tween(1, self, {visual_height = self.height, visual_width = self.width}, 'out-elastic', nil, nil, 1, 0.5)
-  self.selected_index = 1
+  self.selected_index = self.selected_index or 1
   self.options = self.options or {
     {name="no options smh", type = "float", step = "0.1", value = 0.5, onSet = function(v) print(v) end}, 
     {name="add some options", type = "bool", value = false, onSet = function(v) print(tostring(v)) end}
