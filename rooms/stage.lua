@@ -7,18 +7,18 @@ function Stage:new()
 
   self.maincirc = self:addObject(maincircle, gw/2, gh/2, {color = colors[3], mult = -1})
   self.player = self:addObject(player, gw/2, 0)
+  self.portal = self:addObject(portal, 180, 0)
   self.block = self:addObject(block, 180, 0)
   self.spike = self:addObject(spike, 270, 0)
 
 end
 
 function Stage:update(dt)
+  if self.dead then return end
   if maininput:pressed("back") then
     gotoRoom('Menu')
   end
   if self.paused then return end
-  if self.block.x < -180 then self.block.x = 180 end
-  if self.spike.x < -180 then self.spike.x = 180 end
   Stage.super.update(self, dt)
 end
 

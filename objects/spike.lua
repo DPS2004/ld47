@@ -7,7 +7,7 @@ function spike:new(...)
   self.width = 16
   self.height = 16
   self.dy = 0
-  self.y = 0
+  self.y = self.y or 0
   self.dx = -1
   self.x = self.x or 180
   -- todo move this elsewhere bc loading a sprite every time you create an object is not super good
@@ -17,8 +17,10 @@ function spike:new(...)
 end
 
 function spike:update()
+  if self.dead then return end
   self.x = self.x + self.dx
   self.world:update(self.shape, self.x, self.y)
+  if self.x < -180 then self:kill() end
 end
 
 function spike:draw()

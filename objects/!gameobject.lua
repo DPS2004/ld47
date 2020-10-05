@@ -26,9 +26,8 @@ function GameObject:draw()
 end
 
 function GameObject:kill()
+  self.dead = true
   if self.shape then
     self.world:remove(self.shape)
   end
-
-  self.dead = true
 end
