@@ -3,17 +3,19 @@ portal = GameObject:extend()
 function portal:new(...)
   portal.super.new(self, ...)
   self.color = colors[1]
-  self.width = 16
-  self.height = 16
+  self.width = 32
+  self.height = 32
   self.dy = 0
   self.y = 0
   self.dx = 0
   self.x = 180
+  self.list = self.list or nil
+  if self.list ~= nil then self.update = self:levelUpdate() end
   self.rng = settings.spawnMax
   self.total_time = 0
   self.last_decoration = 10
   self.objectRNG = 0
-  self.spr = blocksprite
+  self.spr = portalsprite
 end
 
 function portal:update()
@@ -58,7 +60,11 @@ function portal:update()
     self.last_decoration = self.total_time
     if math.random(0,100)/100 < 0.5 then self.room:addObject(bush,math.random(self.x-5,self.x+5),0)
     else self.room:addObject(lamppost,math.random(self.x-5,self.x+5),0) end
-  end 
+  end
+end
+
+function portal:levelUpdate()
+
 end
 
 function portal:draw()
@@ -66,7 +72,7 @@ function portal:draw()
   love.graphics.setDefaultFilter('nearest','nearest')
   love.graphics.print(self.rng..
     "\n"..self.objectRNG,0,20)
-  love.graphics.draw(self.spr,gw/2,gh/2,math.rad(0-self.x),1,1,0,-82+self.y)
+  love.graphics.draw(self.spr,gw/2,gh/2-90,math.rad(love.timer.getTime()*100),1,1,12,12)
 end
 
 function portal:fmSpikeBlock()

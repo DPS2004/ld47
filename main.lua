@@ -54,6 +54,7 @@ function love.load()
   coinsprite = love.graphics.newImage("assets/spr/coin.png")
   bushsprite = love.graphics.newImage("assets/spr/bush.png")
   lampsprite = love.graphics.newImage("assets/spr/lamppost.png")
+  portalsprite = love.graphics.newImage("assets/spr/portal.png")
   particle = love.graphics.newImage("assets/spr/pixel.png")
   music = love.audio.newSource("assets/audio/ld47.ogg", "static")
   coinsnd = love.audio.newSource("assets/audio/coin.ogg", "static")
@@ -77,6 +78,7 @@ function love.load()
   settings.masterVolume = 1
   settings.musicVolume = 1
   settings.soundVolume = 1
+  level_playing = -1
 
   -- shack can be used for screen shakes and stuff whoaaa
   shack:setDimensions(gw, gh)
