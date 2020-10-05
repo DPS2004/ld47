@@ -21,9 +21,9 @@ require 'utils'
 -- for pixels to look pixelly
 love.graphics.setLineStyle('rough')
 love.graphics.setDefaultFilter('nearest','nearest')
-local font = love.graphics.newFont('assets/04b03.ttf',8)
-font:setFilter('nearest')
-love.graphics.setFont(font)
+game_font = love.graphics.newFont('assets/04b03.ttf',8)
+game_font:setFilter('nearest')
+love.graphics.setFont(game_font)
 -- require() all the objects and rooms files yeah
 require 'classrequire'
 obj_list = {}

@@ -2,6 +2,7 @@ Menu = Room:extend()
 
 function Menu:new()
   self.super.new(self)
+  love.graphics.setFont(game_font)
 
   self:addObject(OptionBox, gw/2, gh/2, {width = 120, height = 36, options = {
     {type = "function", name = "Play", func = function() gotoRoom('Stage') end},
