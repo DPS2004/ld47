@@ -1,5 +1,3 @@
---plinks note: this is used to manage the screen size yeahhhhh
-
 -- push.lua v0.4
 
 -- Copyright (c) 2020 Ulysse Ramage
@@ -216,8 +214,7 @@ function push:finish(shader)
 
     --clear canvas
     for i = 1, #self.canvases do
-      --love.graphics.setCanvas(self.canvases[i].canvas)
-      love.graphics.setCanvas(_render.canvas)
+      love.graphics.setCanvas(self.canvases[i].canvas)
       love.graphics.clear()
     end
 
@@ -236,15 +233,11 @@ end
 function push:toGame(x, y)
   x, y = x - self._OFFSET.x, y - self._OFFSET.y
   local normalX, normalY = x / self._GWIDTH, y / self._GHEIGHT
-  --[[
+  
   x = (x >= 0 and x <= self._WWIDTH * self._SCALE.x) and normalX * self._WWIDTH or nil
   y = (y >= 0 and y <= self._WHEIGHT * self._SCALE.y) and normalY * self._WHEIGHT or nil
   
   return x, y
-  ]]
-  normalX = lume.clamp(normalX, 0, 1)
-  normalY = lume.clamp(normalY, 0, 1)
-  return normalX * self._WWIDTH, normalY * self._WHEIGHT
 end
 
 function push:toReal(x, y)

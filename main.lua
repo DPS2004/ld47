@@ -59,15 +59,17 @@ function love.load()
   lampsprite = love.graphics.newImage("assets/spr/lamppost.png")
   music = love.audio.newSource("assets/audio/ld47.ogg", "static")
 
+  shader = love.graphics.newShader("assets/THE background.glsl")
+
   gotoRoom('Menu')
-
-
 
   -- do push stuff
   push:setupScreen(gw, gh, gw*sx, gh*sy, {pixelperfect = true})
   push:setupCanvas({
+    { name = 'background', shader = shader},
     { name = 'main' },
   })
+  push:getCanvasTable("background").canvas:setWrap("mirroredrepeat")
   settings = {}
   settings.spawnMin = 300
   settings.spawnMax = 600
@@ -78,9 +80,11 @@ function love.load()
 
   min_dt = 1/60
   next_time = love.timer.getTime()
+  start_time = love.timer.getTime()
 end
 
 function love.update(dt)
+  shader:send("TIMEEEEEE", love.timer.getTime() - start_time)
   maininput:update()
   cs:update(dt)
   lovebird.update()

@@ -37,7 +37,28 @@ function Stage:destroy()
 end
 
 function Stage:draw()
+  push:setCanvas("main")
   self.super.draw(self)
   helpers.color(1)
   love.graphics.print(tostring(love.timer.getFPS()))
+
+
+  push:setCanvas("background")
+  love.graphics.clear(0, 0, 0, 1)
+  love.graphics.push("all")
+    love.graphics.translate(gw/2, gh/2)
+    love.graphics.setLineWidth(10)
+    love.graphics.setBlendMode("add")
+    helpers.color(5)
+    love.graphics.rotate((love.timer.getTime() - start_time) / 3)
+    for i = 1, 7, 3 do
+      local radius = math.mod(i * 20 + (love.timer.getTime() - start_time) * i * 10, 300)
+      local radius_2 = 300 - math.mod(i * 20 + (love.timer.getTime() - start_time) * i * 8, 300)
+      love.graphics.setLineWidth(math.min(i * 10 * math.sin(radius / 100), radius))
+      love.graphics.circle('line', 0, 0, radius, 100)
+      love.graphics.setLineWidth(math.min(i * 10 * math.sin(radius_2 / 100), radius_2))
+      love.graphics.circle('line', 0, 0, radius_2, 100)
+    end
+
+  love.graphics.pop()
 end

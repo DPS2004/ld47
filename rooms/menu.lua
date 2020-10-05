@@ -20,6 +20,7 @@ function Menu:new()
 end 
 
 function Menu:draw()
+  push:setCanvas("main")
   self.super.draw(self)
   helpers.color(1)
   love.graphics.print("welcome to the\nM A I N  M E N U")
