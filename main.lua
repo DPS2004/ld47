@@ -105,6 +105,7 @@ function love.draw()
   shack:apply()
   cs:draw()
 
+  push:setCanvas("main")
   if draw_collision then
     love.graphics.push("all")
     love.graphics.translate(gw/2, gh/2 + 100)

@@ -9,14 +9,7 @@ function maincircle:new(...)
   self.height = self.height or 32
 end
 
-function maincircle:update()
-  local mx, my = push:toGame(love.mouse.getPosition())
-  self.x = gw/2
-  self.y = gh/2
-end
-
 function maincircle:draw()
-
   love.graphics.push("all")
   love.graphics.setLineWidth(5)
   love.graphics.setColor(self.color)
