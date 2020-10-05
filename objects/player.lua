@@ -107,7 +107,7 @@ function player:update()
 
   -- yoo collision stuffff
   local filter = function(item, other) 
-    if other.name == "spike" or other.name == "coin" then
+    if other.name == "spike" or other.name == "coin" or other.name == "bolt" then
       return "cross"
     end
     if other.name == "block" then
@@ -118,7 +118,7 @@ function player:update()
   self.x = real_x
   self.y = real_y
   for i, col in pairs(cols) do
-    if self.safety == 0 and col.other.name == "spike" then
+    if self.safety == 0 and (col.other.name == "spike" or col.other.name == "bolt") then
       hurtsnd:stop()
       hurtsnd:play()
       self.hp = self.hp - 1
