@@ -45,12 +45,16 @@ function portal:update()
   	if objectY > 44 and objectY < 60 then objectY = 60 end
     if self.objectRNG > 0.9 then
       self:fmBolt()
-  	elseif self.objectRNG > 0.75 then
+  	elseif self.objectRNG > 0.8 then
   	  self:fmHoleInWall()
-  	elseif self.objectRNG > 0.5 then
+  	elseif self.objectRNG > 0.6 then
   	  self:fmSpikeBlock()
-  	elseif self.objectRNG > 0.25 then
+  	elseif self.objectRNG > 0.4 then
   	  self:fmDoubleBlock()
+  	elseif self.objectRNG > 0.2 then
+  	  self:fmStairsOne()
+  	elseif self.objectRNG > 0.1 then
+  	  self:fmStairsTwo()
   	else
   	  self.room:addObject(spike,self.x,0)
   	  if self.objectRNG < 0.1 then self.room:addObject(spike,self.x+8,0) end
@@ -89,8 +93,7 @@ end
 function portal:draw()
   love.graphics.setColor(self.color)
   love.graphics.setDefaultFilter('nearest','nearest')
-  love.graphics.print(self.rng..
-    "\n"..self.objectRNG,0,20)
+
   love.graphics.draw(self.spr,gw/2,gh/2-90,math.rad(love.timer.getTime()*100),1,1,12,12)
 end
 
@@ -105,6 +108,18 @@ end
 function portal:fmDoubleBlock()
 	self.room:addObject(block,self.x,0)
 	self.room:addObject(block,self.x,16)
+end
+
+function portal:fmStairsOne()
+	self.room:addObject(block,self.x,0)
+	self.room:addObject(block,self.x-10,0)
+	self.room:addObject(block,self.x,16)
+end
+
+function portal:fmStairsTwo()
+	self.room:addObject(block,self.x-22,0)
+	self.room:addObject(block,self.x-11,16)
+	self.room:addObject(block,self.x,32)
 end
 
 function portal:fmHoleInWall()

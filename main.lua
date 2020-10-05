@@ -15,7 +15,8 @@ shack = require 'lib/shack'
 deep = require 'lib/deep'
 bump = require 'lib/bump'
 levels = require 'assets/levels'
-
+newlevel = 1
+highscore = 0
 require 'utils'
 -- for pixels to look pixelly
 love.graphics.setLineStyle('rough')

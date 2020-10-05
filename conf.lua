@@ -7,5 +7,5 @@ function love.conf(t)
   t.window.title = "Ludum Dare 47"
   t.window.width = gw 
   t.window.height = gh
-  t.console = true
+  t.console = false
 end

@@ -10,22 +10,38 @@ function Menu:new()
     {{1,0,77/255,1},{1,163/255,0,1},{1,236/255,39/255,1},{0,228/255,54/255,1},{41/255,173/255,1,1},{131/255,118/255,156/255,1},{1,119/255,168/255,1}}, --dps
     {{72/255,72/255,92/255,1},{130/255,84/255,113/255,1},{1,69/255,0,1}}, --pipe
     {{124/255,30/255,1,1},{1,41/255,125/255,1}}, --katie
-    {{1,0,0,1},{1,0.5,0,1},{1,1,0,1},{0,1,0,1},{0,0,1,1},{0.1,0,1,1},{1,0,1,1},{1,1,1,1}} --ds
+    {{1,0,0,1},{1,0.5,0,1},{1,1,0,1},{0,1,0,1},{0,0,1,1},{0.1,0,1,1},{1,0,1,1},{1,1,1,1}}, --ds
+    {{1,0,77/255,1},{1,163/255,0,1},{1,236/255,39/255,1},{0,228/255,54/255,1},{41/255,173/255,1,1},{131/255,118/255,156/255,1},{1,119/255,168/255,1}}
   }
   self.focus = 1
-  self.level = 0
+  self.level = newlevel 
+  if newlevel >= 5 then
+    self.level = 0
+  end
   self.logo = ez.newanim(ez.newtemplate("assets/spr/logo.png",160,3,true))
 
   self.optionsMenu = self:addObject(OptionBox, gw/2, gh*(2/3), {width = 120, height = 46, options = {
+    {type = "float", name = "HIGH SCORE:", step = "0", value = highscore, onSet = function(v)
+
+      end,
+
+      func =
+      function() 
+
+      end
+    },
     {type = "float", name = "Play", step = "1", value = self.level, onSet = function(v)
-        self.level = math.max(math.min(v, 30), 0) % 11
-        self.optionsMenu.options[1].value = self.level
+        self.level = math.max(math.min(v, 30), 0) % 5
+        self.optionsMenu.options[2].value = self.level
       end,
 
       func =
       function() 
         level_playing = self.level
         gotoRoom('Stage')
+        if self.level ~= 0 then
+        newlevel = self.level +1
+        end
       end
     },
     {type = "function", name = "Options", func = function()
@@ -48,11 +64,12 @@ function Menu:new()
     end},
     {type = "function", name = "Credits", func = function ()
       self.optionsMenu:kill()
-      self:addObject(OptionBox, gw/2, gh*(2/3), {width = 200, height = 66, options = {
+      self:addObject(OptionBox, gw/2, gh*(2/3), {width = 200, height = 72, options = {
         {type = "function", name = "DPS2004 - Coordinator, Lead Developer", func = function() self.focus = 2 end},
         {type = "function", name = "pipelinks - Programmer, Shader Expert", func = function() self.focus = 3 end},
         {type = "function", name = "Katie1118 - Lead Artist, Hypesquad", func = function() self.focus = 4 end},
         {type = "function", name = "DeadlySprinklez - Programmer, Artist", func = function() self.focus = 5 end},
+        {type = "function", name = "saladplainzone - Feedback", func = function() self.focus = 6 end},
         {type = "function", name = "", func = function() self.focus = 1 end},
         {type = "function", name = "Back", func = function() self:new() end}
       }, selected_index = 6})

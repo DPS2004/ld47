@@ -40,6 +40,7 @@ function Stage:update(dt)
     self.score = self.score + 1
   end
   if maininput:pressed("back") then
+
     gotoRoom('Menu')
     return
   end
@@ -57,6 +58,9 @@ function Stage:pause()
 end
 
 function Stage:destroy()
+    if self.score > highscore then
+      highscore = self.score
+    end
   self.dead = true
   music:stop()
 end

@@ -12,6 +12,7 @@ function block:new(...)
   self.dx = -1
   self.x = self.x or 180
   self.spr = blocksprite
+  self.scale = 0
   
   self.shape = { name = "block" }
   self.world:add(self.shape, self.x, self.y, self.width, self.height)
@@ -27,12 +28,18 @@ function block:update()
       self.world:update(col.other, col.otherRect.x + self.dx, col.otherRect.y)
     end
   end
+
   if self.x < -180 then self:kill() end
+  if self.x <= -160 then self.scale = self.scale - 0.05 end
+  if self.x >= 170 and self.x <= 180 then self.scale = self.scale + 0.1 end
+  if self.x < 170 and self.x > -160 then
+    self.scale = 1
+  end
 end
 
 function block:draw()
   love.graphics.setColor(self.color)
   love.graphics.setDefaultFilter('nearest','nearest')
-  love.graphics.draw(self.spr,gw/2,gh/2,math.rad(0-self.x),1,1,0,-82+self.y)
+  love.graphics.draw(self.spr,gw/2,gh/2,math.rad(0-self.x),self.scale,1,0,-82+self.y)
 end
 
