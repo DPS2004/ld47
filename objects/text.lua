@@ -13,11 +13,6 @@ end
 function text:update()
   if self.dead then return end
   self.x = self.x + self.dx
-  self.world:update(self.shape, self.x, self.y)
-  local filter = function() return "cross" end
-  local real_x, real_y, cols = self.world:move(self.shape, self.x, self.y, filter)
-  self.x = real_x
-  self.y = real_y
   if self.x < -500 then self:kill() end
 end
 

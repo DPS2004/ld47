@@ -16,6 +16,7 @@ inspect = require 'lib/inspect'
 shack = require 'lib/shack'
 deep = require 'lib/deep'
 bump = require 'lib/bump'
+levels = require 'assets/levels'
 
 require 'utils'
 -- for pixels to look pixelly
@@ -65,6 +66,13 @@ function love.load()
   hurtsnd = love.audio.newSource("assets/audio/dmg.ogg", "static")
 
   shader = love.graphics.newShader("assets/THE background.glsl")
+
+  highscores = {}
+  local i = 1
+  while i <= 30 do
+    table.insert(highscores, i, 0)
+    i = i + 1
+  end
 
   gotoRoom('Menu')
 

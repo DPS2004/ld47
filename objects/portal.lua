@@ -10,7 +10,7 @@ function portal:new(...)
   self.dx = 0
   self.x = 180
   self.list = self.list or nil
-  if self.list ~= nil then self.update = self:levelUpdate() end
+  if self.list then self.level = levels[self.list] end
   self.rng = settings.spawnMax
   self.total_time = 0
   self.last_decoration = 10
@@ -19,6 +19,7 @@ function portal:new(...)
 end
 
 function portal:update()
+  if self.list ~= nil then self:levelUpdate() return end
   -- at start, spawn random decorations
   if self.total_time == 0 then
     local i = 0
@@ -64,7 +65,23 @@ function portal:update()
 end
 
 function portal:levelUpdate()
-
+  local i = 1
+  local room = self.room
+  while i <= #self.level.spawn do
+    if self.level.spawn[i].time == self.total_time then
+      self.level.spawn[i].func(room)
+    end
+    i = i + 1
+  end
+  self.total_time = self.total_time + 1
+  if self.total_time > self.level.winTime then 
+    if self.room.score > highscores[level_playing] then highscores[level_playing] = self.room.score end
+    self.room.win = true
+    if self.total_time > self.level.winTime + 300 then
+      gotoRoom('Menu')
+      return
+    end
+  end
 end
 
 function portal:draw()
