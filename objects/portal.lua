@@ -3,8 +3,8 @@ portal = GameObject:extend()
 function portal:new(...)
   portal.super.new(self, ...)
   self.color = colors[1]
-  self.width = 16
-  self.height = 16
+  self.width = 32
+  self.height = 32
   self.dy = 0
   self.y = 0
   self.dx = 0
@@ -13,7 +13,7 @@ function portal:new(...)
   self.total_time = 0
   self.last_decoration = 10
   self.objectRNG = 0
-  self.spr = blocksprite
+  self.spr = portalsprite
 end
 
 function portal:update()
@@ -66,7 +66,7 @@ function portal:draw()
   love.graphics.setDefaultFilter('nearest','nearest')
   love.graphics.print(self.rng..
     "\n"..self.objectRNG,0,20)
-  love.graphics.draw(self.spr,gw/2,gh/2,math.rad(0-self.x),1,1,0,-82+self.y)
+  love.graphics.draw(self.spr,gw/2,gh/2-90,math.rad(love.timer.getTime()*100),1,1,12,12)
 end
 
 function portal:fmSpikeBlock()
