@@ -82,7 +82,7 @@ function player:update()
   
   if self.safety ~= 0 then self.safety = self.safety - 1 end
 
-  if maininput:pressed("up") and self.old_y == self.y then
+  if maininput:pressed("up") and self.old_y > self.y-1 and self.old_y < self.y+1 then
     self.dy = 3.3
   end
 

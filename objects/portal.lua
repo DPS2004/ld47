@@ -28,6 +28,13 @@ function portal:update()
   end
   self.total_time = love.timer.getTime()
   -- obstacle spawning
+  if maininput:down("accept") and (maininput:pressed("up") or
+    maininput:pressed("down") or maininput:pressed("left") or maininput:pressed("right")) then
+    if maininput:pressed("up") then self:fmDoubleBlock() end
+    if maininput:pressed("down") then self:fmSpikeBlock() end
+    if maininput:pressed("right") then self:fmHoleInWall() end
+    if maininput:pressed("left") then self.room:addObject(block,self.x,0) end
+  end
   if self.rng <= 0 then
   	self.rng = math.random(settings.spawnMin, settings.spawnMax) -- set RNG spawn time to a number between 5 and 10
   	local objectY = math.random(0,6)*10
