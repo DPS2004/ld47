@@ -57,7 +57,8 @@ end
 function portal:draw()
   love.graphics.setColor(self.color)
   love.graphics.setDefaultFilter('nearest','nearest')
-  love.graphics.print(self.rng.."\n"..self.objectRNG,0,20)
+  love.graphics.print(self.rng..
+    "\n"..self.objectRNG,0,20)
   love.graphics.draw(self.spr,gw/2,gh/2,math.rad(0-self.x),1,1,0,-82+self.y)
 end
 
