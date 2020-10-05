@@ -55,6 +55,8 @@ function love.load()
 
   blocksprite = love.graphics.newImage("assets/spr/block.png")
   spikesprite = love.graphics.newImage("assets/spr/spike.png")
+  music = love.audio.newSource("assets/audio/ld47.ogg", "static")
+
   gotoRoom('Menu')
 
 

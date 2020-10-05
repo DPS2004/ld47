@@ -10,21 +10,32 @@ function Stage:new()
   self.portal = self:addObject(portal, 180, 0)
   self.block = self:addObject(block, 180, 0)
   self.spike = self:addObject(spike, 270, 0)
-
+  music:play()
 end
 
 function Stage:update(dt)
   if self.dead then return end
   if maininput:pressed("back") then
     gotoRoom('Menu')
+    return
   end
   if self.paused then return end
   Stage.super.update(self, dt)
+  if not self.dead and not music:isPlaying() then
+    music:seek(0)
+    music:play()
+  end
 end
 
 function Stage:pause()
   self.paused = true
 end
+
+function Stage:destroy()
+  self.dead = true
+  music:stop()
+end
+
 function Stage:draw()
   self.super.draw(self)
   helpers.color(1)
