@@ -19,6 +19,7 @@ function player:new(...)
 end
 
 function player:update()
+  ez.animupdate(self.spr,1)
   
   if maininput:down("left") then
     if self.dx > 0 then
@@ -107,7 +108,6 @@ function player:update()
   if math.abs(self.dx) <= 0.05 then
     self.dx = 0
   end
-  ez.animupdate(self.spr,1)
 end
 
 function player:draw()
