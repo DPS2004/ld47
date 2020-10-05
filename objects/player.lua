@@ -96,7 +96,7 @@ function player:update()
       hurtsnd:stop()
       hurtsnd:play()
     end
-    self.safety = 240
+    self.safety = 120
     self.x = 0
     self.dx = 0
     self.y = 0
@@ -122,7 +122,7 @@ function player:update()
       hurtsnd:stop()
       hurtsnd:play()
       self.hp = self.hp - 1
-      self.safety = 180
+      self.safety = 60
     end
     if col.other.name == "block" and col.normal.y == 1 then
       if maininput:pressed("up") then self.dy = 3.3 end
