@@ -12,7 +12,7 @@ function Stage:new()
   self.emitter = love.graphics.newParticleSystem(particle, 1000)
 
   self.emitter:setColors({1,215/255,0,1},{1,1,0,1},{1,215/255,0,1},{1,1,1,1},{1,215/255,0,1},{1,1,0,1},{1,215/255,0,1},{1,1,1,1})
-  self.emitter:setParticleLifetime(10,10)
+  self.emitter:setParticleLifetime(3,3)
   self.emitter:setEmissionRate(60)
   self.emitter:setPosition(gw/2,gh/2)
   self.emitter:setSpread(math.rad(360))
