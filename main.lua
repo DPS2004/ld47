@@ -82,6 +82,7 @@ function love.load()
   settings.masterVolume = 1
   settings.musicVolume = 1
   settings.soundVolume = 1
+  level_playing = -1
 
   -- shack can be used for screen shakes and stuff whoaaa
   shack:setDimensions(gw, gh)

@@ -44,7 +44,8 @@ function OptionBox:update(dt)
     if math.abs(opt.value) < 0.00001 then
       opt.value = 0
     end
-  elseif (opt.type == "function" and maininput:pressed("accept")) then -- process function options
+  end
+  if (opt.func and maininput:pressed("accept")) then -- process function options
     opt.func()
   end
 end

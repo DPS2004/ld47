@@ -9,6 +9,8 @@ function portal:new(...)
   self.y = 0
   self.dx = 0
   self.x = 180
+  self.list = self.list or nil
+  if self.list ~= nil then self.update = self:levelUpdate() end
   self.rng = settings.spawnMax
   self.total_time = 0
   self.last_decoration = 10
@@ -58,7 +60,11 @@ function portal:update()
     self.last_decoration = self.total_time
     if math.random(0,100)/100 < 0.5 then self.room:addObject(bush,math.random(self.x-5,self.x+5),0)
     else self.room:addObject(lamppost,math.random(self.x-5,self.x+5),0) end
-  end 
+  end
+end
+
+function portal:levelUpdate()
+
 end
 
 function portal:draw()

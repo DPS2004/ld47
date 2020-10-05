@@ -13,9 +13,20 @@ function Menu:new()
     {{1,0,0,1},{1,0.5,0,1},{1,1,0,1},{0,1,0,1},{0,0,1,1},{0.1,0,1,1},{1,0,1,1},{1,1,1,1}} --ds
   }
   self.focus = 1
+  self.level = 1
 
   self.optionsMenu = self:addObject(OptionBox, gw/2, gh/2, {width = 120, height = 46, options = {
-    {type = "function", name = "Play", func = function() gotoRoom('Stage') end},
+    {type = "float", name = "Play", step = "1", value = self.level, onSet = function(v)
+        self.level = math.max(math.min(v, 30), 0)
+        self.optionsMenu.options[1].value = self.level
+      end,
+
+      func =
+      function() 
+        level_playing = self.level
+        gotoRoom('Stage')
+      end
+    },
     {type = "function", name = "Options", func = function()
     	self.optionsMenu:kill()
     	self:addObject(OptionBox, gw/2, gh/2, {width = 180, height = 75, options = {
