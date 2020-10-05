@@ -15,6 +15,17 @@ function Menu:new()
     		{type = "function", name = "Back", func = function() self:new() end}
     	}})
     end},
+    {type = "function", name = "Credits", func = function ()
+      self.optionsMenu:kill()
+      self:addObject(OptionBox, gw/2, gh/2, {width = 200, height = 66, options = {
+        {type = "function", name = "DPS2004 - Coordinator, Lead Developer", func = function() end},
+        {type = "function", name = "pipelinks - Programmer, Shader Expert", func = function() end},
+        {type = "function", name = "Katie1118 - Lead Artist, Hypesquad", func = function() end},
+        {type = "function", name = "DeadlySprinklez - Programmer, Artist", func = function() end},
+        {type = "function", name = "", func = function() end},
+        {type = "function", name = "Back", func = function() self:new() end}
+      }, selected_index = 6})
+    end},
     {type = "function", name = "Exit", func = function() love.event.quit() end},
   }})
 end 
