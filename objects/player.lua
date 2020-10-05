@@ -103,8 +103,7 @@ function player:update()
   self.y = real_y
   for i, col in pairs(cols) do
     print(col.other.name, col.normal.x, col.normal.y)
-    if self.safety == 0 and (col.other.name == "block" and (col.normal.x == -1) 
-       or col.other.name == "spike") then
+    if self.safety == 0 and col.other.name == "spike" then
       self.hp = self.hp - 1
       self.safety = 180
     end
