@@ -6,21 +6,30 @@ function Stage:new()
   self.world = bump.newWorld(32)
 
   self.maincirc = self:addObject(maincircle, gw/2, gh/2, {color = colors[3], mult = -1})
+  self.frames = 0
+  self.score = 0
   self.player = self:addObject(player, gw/2, 0)
   self.portal = self:addObject(portal, 180, 0)
   self.block = self:addObject(block, 180, 0)
+  self.coin = self:addObject(coin, 215, 46)
   self.spike = self:addObject(spike, 270, 0)
   music:play()
 end
 
 function Stage:update(dt)
   if self.dead then return end
+  self.frames = self.frames + 1
+  if self.frames%60 == 0 then
+    self.frames = 0
+    self.score = self.score + 1
+  end
   if maininput:pressed("back") then
     gotoRoom('Menu')
     return
   end
   if self.paused then return end
   Stage.super.update(self, dt)
+
   if not self.dead and not music:isPlaying() then
     music:seek(0)
     music:play()
@@ -41,7 +50,7 @@ function Stage:draw()
   self.super.draw(self)
   helpers.color(1)
   love.graphics.print(tostring(love.timer.getFPS()))
-
+  love.graphics.print("Score: "..tostring(self.score))
 
   push:setCanvas("background")
   love.graphics.clear(0, 0, 0, 1)
