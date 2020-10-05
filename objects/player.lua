@@ -88,6 +88,20 @@ function player:update()
   if math.abs(self.dx) <= 0.05 then
     self.dx = 0
   end
+  
+  if self.x > 120 or self.x < -120 then
+    if self.safety == 0 then
+      self.hp = self.hp - 1
+    end
+    self.safety = 240
+    self.x = 0
+    self.dx = 0
+    self.y = 0
+    self.dy = 0
+    self.world:move(self.shape, self.x, self.y, function() return "cross" end)
+    return
+  end
+
   -- yoo collision stuffff
   local filter = function(item, other) 
     if other.name == "spike" then
