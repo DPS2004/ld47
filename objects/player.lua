@@ -114,12 +114,10 @@ function player:update()
       return "slide"
     end
   end
-  print(self.x)
   local real_x, real_y, cols = self.world:move(self.shape, self.x, self.y, filter)
   self.x = real_x
   self.y = real_y
   for i, col in pairs(cols) do
-    print(col.other.name, col.normal.x, col.normal.y)
     if self.safety == 0 and col.other.name == "spike" then
       hurtsnd:stop()
       hurtsnd:play()

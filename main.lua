@@ -1,8 +1,6 @@
 --require all the Cool Libraries that we're never gonna use
 Object = require 'lib/classic'
-Input = require 'lib/boipushy'
 Timer = require 'lib/chrono'
-Camera = require 'lib/camera'
 baton = require 'lib/baton'
 moses = require 'lib/moses'
 ez = require 'lib/ezanim'
@@ -33,8 +31,6 @@ recursiveEnumerate('rooms', obj_list)
 requireFiles(obj_list)
 
 function love.load()
-  input = Input()
-  camera = Camera()
   maininput = baton.new {
     controls = {
       left = {"key:left", "key:a", "axis:leftx-", "button:dpleft"},
@@ -119,6 +115,7 @@ function love.draw()
   shack:apply()
   cs:draw()
 
+  push:setCanvas("main")
   if draw_collision then
     love.graphics.push("all")
     love.graphics.translate(gw/2, gh/2 + 100)

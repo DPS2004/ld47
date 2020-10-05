@@ -1,6 +1,7 @@
 block = GameObject:extend()
 
 -- this is a circle
+-- no it's not
 function block:new(...)
   block.super.new(self, ...)
   self.color = colors[1]
@@ -19,7 +20,13 @@ end
 function block:update()
   if self.dead then return end
   self.x = self.x + self.dx
-  self.world:update(self.shape, self.x, self.y)
+  local _, _, cols = self.world:move(self.shape, self.x, self.y, function() return "cross" end)
+  -- what
+  for _, col in ipairs(cols) do
+    if col.other.name == "player" then
+      self.world:update(col.other, col.otherRect.x + self.dx, col.otherRect.y)
+    end
+  end
   if self.x < -180 then self:kill() end
 end
 
