@@ -16,6 +16,7 @@ end
 
 
 function OptionBox:update(dt)
+  if self.dead then return end
   OptionBox.super.update(self, dt)
 
   -- update selection

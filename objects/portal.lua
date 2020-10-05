@@ -9,14 +9,14 @@ function portal:new(...)
   self.y = 0
   self.dx = 0
   self.x = 180
-  self.rng = math.random(10,20)*60
+  self.rng = settings.spawnMax
   self.objectRNG = 0
-  self.spr = love.graphics.newImage("assets/spr/block.png")
+  self.spr = blocksprite
 end
 
 function portal:update()
   if self.rng == 0 then
-  	self.rng = math.random(5, 10)*60 -- set RNG spawn time to a number between 5 and 10
+  	self.rng = math.random(settings.spawnMin, settings.spawnMax) -- set RNG spawn time to a number between 5 and 10
   	local objectY = math.random(0,6)*10
   	self.objectRNG = math.random(0,1000)/1000 
   	if objectY > 44 and objectY < 60 then objectY = 60 end

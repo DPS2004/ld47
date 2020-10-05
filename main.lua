@@ -66,6 +66,9 @@ function love.load()
   push:setupCanvas({
     { name = 'main' },
   })
+  settings = {}
+  settings.spawnMin = 300
+  settings.spawnMax = 600
 
   -- shack can be used for screen shakes and stuff whoaaa
   shack:setDimensions(gw, gh)
