@@ -118,8 +118,11 @@ function player:draw()
   if self.safety % 4 < 3 or self.safety == 0 then
     ez.animdraw(self.spr,gw/2,gh/2,math.rad(0-self.x),1,1,0,-80+self.y)
   end
-  love.graphics.print("Y: "..tostring(self.y)..
+  love.graphics.print("X: "..tostring(self.x)..
+    "\nDelta X: "..tostring(self.dx)..
+    "\nY: "..tostring(self.y)..
     "\nOld Y: "..tostring(self.old_y)..
+    "\nCan Jump: "..tostring(self.old_y == self.y)..
     "\nDelta Y: "..tostring(self.dy)..
     "\nHP: "..tostring(self.hp)..
     "\nInvuln.: "..tostring(math.floor(self.safety/6)/10),0,40)
