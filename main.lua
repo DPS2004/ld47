@@ -53,6 +53,8 @@ function love.load()
 
   cs = nil
 
+  blocksprite = love.graphics.newImage("assets/spr/block.png")
+  spikesprite = love.graphics.newImage("assets/spr/spike.png")
   gotoRoom('Menu')
 
 

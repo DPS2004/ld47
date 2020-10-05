@@ -11,7 +11,7 @@ function spike:new(...)
   self.dx = -1
   self.x = self.x or 180
   -- todo move this elsewhere bc loading a sprite every time you create an object is not super good
-  self.spr = love.graphics.newImage("assets/spr/spike.png")
+  self.spr = spikesprite
   self.shape = {name = "spike"}
   self.world:add(self.shape, self.x, self.y, 7, 16)
 end

@@ -10,7 +10,7 @@ function block:new(...)
   self.y = self.y or 0
   self.dx = -1
   self.x = self.x or 180
-  self.spr = love.graphics.newImage("assets/spr/block.png")
+  self.spr = blocksprite
   
   self.shape = { name = "block" }
   self.world:add(self.shape, self.x, self.y, self.width, self.height)
