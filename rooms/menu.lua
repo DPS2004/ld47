@@ -46,6 +46,7 @@ function Menu:update(dt)
 end
 
 function Menu:draw()
+  push:setCanvas("main")
   self.super.draw(self)
   helpers.color(1)
 end
