@@ -20,6 +20,7 @@ end
 
 function player:update()
   ez.animupdate(self.spr,1)
+  self.old_y = self.y
   
   if maininput:down("left") then
     if self.dx > 0 then
@@ -103,7 +104,6 @@ function player:update()
   if maininput:pressed("up") and self.old_y == self.y then
     self.dy = 3.3
   end
-  self.old_y = self.y
 
   if math.abs(self.dx) <= 0.05 then
     self.dx = 0
