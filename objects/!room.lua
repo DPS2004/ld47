@@ -2,7 +2,6 @@
 Room = Object:extend()
 
 function Room:new()
-  self.area = Area(self) -- an area is sort of an object manager
   self.timer = Timer() -- timer is used for tweens
 	self.game_objects = {}
 end
