@@ -11,6 +11,7 @@ function Stage:new()
   self.player = self:addObject(player, gw/2, 0)
   self.portal = self:addObject(portal, 180, 0)
   self.block = self:addObject(block, 180, 0)
+  self.coin = self:addObject(coin, 215, 46)
   self.spike = self:addObject(spike, 270, 0)
   music:play()
 end
@@ -21,6 +22,7 @@ function Stage:update(dt)
   if self.frames%60 == 0 then
     self.frames = 0
     self.score = self.score + 1
+  end
   if maininput:pressed("back") then
     gotoRoom('Menu')
     return
@@ -46,5 +48,5 @@ end
 function Stage:draw()
   self.super.draw(self)
   helpers.color(1)
-  love.graphics.print(tostring(love.timer.getFPS()))
+  love.graphics.print("Score: "..tostring(self.score))
 end
