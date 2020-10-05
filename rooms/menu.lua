@@ -33,5 +33,4 @@ end
 function Menu:draw()
   self.super.draw(self)
   helpers.color(1)
-  love.graphics.print("welcome to the\nM A I N  M E N U")
 end
