@@ -118,6 +118,9 @@ function player:update()
   self.y = real_y
   for i, col in pairs(cols) do
     print(col.other.name, col.normal.x, col.normal.y)
+    if col.other.name == "coin" then
+      self.room.score = self.room.score + 10
+    end
     if self.safety == 0 and col.other.name == "spike" then
       self.hp = self.hp - 1
       self.safety = 180
