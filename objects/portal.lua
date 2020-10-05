@@ -15,7 +15,7 @@ function portal:new(...)
 end
 
 function portal:update()
-  if self.rng == 0 then
+  if self.rng <= 0 then
   	self.rng = math.random(settings.spawnMin, settings.spawnMax) -- set RNG spawn time to a number between 5 and 10
   	local objectY = math.random(0,6)*10
   	self.objectRNG = math.random(0,1000)/1000 
